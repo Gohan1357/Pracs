@@ -1,0 +1,47 @@
+# PRACTICAL 1
+# SIMPLE SEARCH ALGORITHM 1
+
+# IMPORT BLOCK
+import random 
+
+# DECLARATION
+OPEN=['S']
+map_list={'S':['A','B','C'],
+'A':['S','D'],
+'B':['S','E'],
+'C':['S','F'],
+'D':['A','G'],
+'E':['B','G','F'],
+'F':['C','E'],
+'G':['D','E']
+}
+
+# FUNCTIONS
+
+def movegen(node):
+    return map_list[node] # returns the current node
+
+
+def goaltest(node):
+    return node=='G' # returns goal node 
+
+def ss1():
+    while len(OPEN)>0: 
+        random.shuffle(OPEN) 
+        N=OPEN.pop()
+        
+        if goaltest(N): 
+            return "Goal Found" 
+        #if N here is the goal node('G' in this case), it will return the goal node
+        
+        else:
+            n=movegen(N) 
+            for i in n:
+                if n not in OPEN: 
+                    OPEN.append(i)
+            print("OPEN_LIST",OPEN)
+    return "NOT FOUND" 
+
+# OUTPUT
+
+print(ss1())

@@ -1,0 +1,55 @@
+# PRACTICAL 6
+# A* SEARCH ALGORITHM FOR ROMANIAN MAP PROBLEM
+
+nodeList={
+        'mumbai':[("delhi",1200),("nasik",350),("goa",800),("pune",130)],
+        "delhi":[("nasik",375),("mumbai",1200)], 
+        "nasik":[("indore",600),("delhi",375),("mumbai",350),("nagpur",600)],
+        "indore":[("nasik",400)], "nagpur":[("nasik",600),("pune",450)],
+        "pune":[("mumbai",130),("nagpur",450),("blore",550)],
+        "blore":[("hyd",110),("goa",750)],
+        "goa":[("blore",750),("hyd",850),("mumbai",800)],
+        "hyd":[("blore",750),("goa",750)]
+        }
+
+hd={"mumbai":790,"delhi":1515,"nasik":1140,"indore":1540,"nagpur":1110,"pune": 660,"blore":110,"goa":850,"hyd":0}
+openList=[("mumbai",700)] 
+closedList=[]
+
+def goalTest(node): 
+    return node=="hyd"
+def moveGen(node):
+    return nodeList[node[0]] 
+def sort(mylist):
+    for i in range(len(mylist)):
+        for j in range(0,len(mylist)-i-1): 
+            if (mylist[j][1]>mylist[j+1][1]):
+                temp=mylist[j] 
+                mylist[j]=mylist[j+1] 
+                mylist[j+1]=temp
+    return (mylist) 
+def AStar():
+    while(len(openList)>0): 
+        sort(openList)
+        print("Open List Contains:",openList) 
+        node=openList.pop(0) 
+        closedList.append((node[0],hd[node[0]])) 
+        print("Picked node:",node)
+        
+        if (goalTest(node[0])): 
+            return "Goal Found"
+        else:
+            neighbours=moveGen(node)
+            print("Neighbours of ",node," are: ",neighbours) 
+            for node in neighbours:
+                if node not in openList and node[0] not in closedList[0]: tup=(node[0],(node[1]+hd[node[0]])) 
+                openList.append(tup)
+                return "Goal Not Found" 
+AStar()
+'''
+Goal='hyd'
+finding hd->>selecting mumbai
+hd1=mumbai->delhi(1200)->nasik(375)->indore(600)->nasik(375)loop hence discarded
+hd2=mumbai->nasik(350)->discarded hd3=mumbai->goa(800)->blore(750)->hyd hd4=
+hd5=
+hd6= '''

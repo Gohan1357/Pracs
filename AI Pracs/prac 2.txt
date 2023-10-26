@@ -1,0 +1,35 @@
+# PRACTICAL 2
+# SIMPLE SEARCH ALGORITHM 2
+
+import random 
+OPEN=['S'] 
+CLOSED=[]
+map_list={'S':['A','B','C'],
+'A':['S','D'],
+'B':['S','E'],
+'C':['S','F'],
+'D':['A','G'],
+'E':['B','G','F'],
+'F':['C','E'],
+'G':['D','E']
+}
+def movegen(node):
+    return map_list[node] 
+def goaltest(node):
+    return node=='G' 
+def ss2():
+    while len(OPEN)>0: 
+        random.shuffle(OPEN) 
+        N=OPEN.pop()
+        CLOSED.append(N) 
+        if goaltest(N):
+            return "GOAL FOUND" 
+        else:
+            n=movegen(N) 
+            for i in n:
+                if i not in CLOSED and i not in OPEN: 
+                    OPEN.append(i)
+            print("OPEN_LIST",OPEN) 
+            print("CLOSED_LIST",CLOSED)
+    return "NOT FOUND"
+print(ss2())

@@ -1,0 +1,45 @@
+# PRACTICAL 3
+# SIMPLE SEARCH ALGORITHM 3
+
+import random 
+OPEN=[['S',None]] 
+CLOSED=[]
+map_list={'S':['A','B','C'],
+'A':['S','D'],
+'B':['S','E'],
+'C':['S','F'],
+'D':['A','G'],
+'E':['B','G','F'],
+'F':['C','E'],
+'G':['D','E']
+}
+def movegen(node):
+    return map_list[node] 
+def goaltest(node):
+    return node=='G' 
+def returnpath(path):
+    if path is not None:
+        return str(path[0])+returnpath(path[1]) 
+    else:
+        return "" 
+def ss3():
+    while len(OPEN)>0: 
+        random.shuffle(OPEN) 
+        print("OPEN_LIST",OPEN) 
+        M=OPEN.pop()
+        N=M[0]
+        CLOSED.append(N) 
+        print("Picked: ",CLOSED) 
+        if goaltest(N):
+            print("GOAL Found")
+            print("Path: ",returnpath(M)[::-1]) 
+            return N
+        else:
+            neigh=movegen(N) 
+            for node in neigh:
+                if node not in CLOSED and node not in OPEN: 
+                    new_list=[node,M]
+                    OPEN.append(new_list) 
+    print("Not Found")
+
+print(ss3())
