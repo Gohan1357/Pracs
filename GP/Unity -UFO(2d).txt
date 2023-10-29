@@ -1,0 +1,179 @@
+Unity -UFO(2d)
+
+
+scripts:
+
+ROTATOR.CS:
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Rotator : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.Rotate(new Vector3(0, 0, 45) * Time.deltaTime);
+    }
+
+   
+}
+
+
+
+
+
+
+CAMERA CONTROLLER.CS:
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CameraContoller : MonoBehaviour
+{
+
+    public GameObject player;
+
+    public Vector3 offset;
+    // Start is called before the first frame update
+    void Start()
+    {
+
+
+        offset = transform.position - player.transform.position; 
+
+
+        
+    }
+
+    // Update is called once per frame
+    void LateUpdate()
+    {
+        transform.position = player.transform.position + offset;
+
+    }
+}
+
+
+
+
+PLAYERCONTROLLER.CS:
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class PlayerController : MonoBehaviour
+{
+
+    private Rigidbody2D rbd;
+
+    public float speed;
+
+    public Text WinText;
+    public Text CountText;
+    public int count = 0;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        rbd= GetComponent<Rigidbody2D>();
+
+
+
+
+
+
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        float moveHorizontal = Input.GetAxis("Horizontal");
+
+        float moveVertical = Input.GetAxis("Vertical");
+
+        Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
+
+        rbd.AddForce(movement*speed);
+
+
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "PickUp")
+        {
+            other.gameObject.SetActive(false);//Disabling game object when there is collision
+            count++;
+            SetCountText();
+
+
+        }
+        void SetCountText()
+        {
+            CountText.text = "Count " + count.ToString();
+            if (count == 7)
+            {
+                WinText.text = "You Win";
+            }
+        }
+    }
+
+}
+
+
+
+
+
+INSTRUCTIONS:
+
+
+STEPS:
+
+
+1.ADD SORTING LAYER TO PLAYER AND BACKGROUND
+
+2. RESET POSITION OF PLAYER AND SCALE X=0.75 Y=0.75
+
+3. MAIN CAMERA - (CHANGE SIZE-16.5) ,CHANGE BACKGROUND COLOUR
+
+4.ADD COMPONENTS -PLAYER -- PHYSICS2D (ADD RIGID BODY),C# SCRIPT ,SELECT GRAVITY SCALE =0 ,SET SPEED=10 
+
+
+5. ADD BACKGROUND COLLIDER - BACKGROUND-BOX COLLIDER MAKE FOR 4 SIDES MEANS 4 COLLIDERS X=14 ,X=-14 AND Y=14,Y=-14 (SIZE X=31.76,Y=3.6)
+
+
+6.ADD  CIRCLE COLLIDER FOR PLAYER
+
+7.CHANGE CAMERA MOVEMENT USING CAMERA SCRIPT ,DRAG PLAYER IN CAMERA INSPECTOR,
+
+8.ADD PICKUP AND UNCHECK PLAYER. ADD SORTING LAYER -PICKUP. ADD NEW TAG PICKUP. CHECK ISTRIGGER CHECKBOX
+
+9.ADD SCRIPT FOR PICKUP -ROTATOR AND MULTIPLY THE PICKUPS BY USING CTRL+D
+
+10.PLAYER CONTROLLER SCRIPT UPDATE
+
+11.ADD UI TEXT SCORE COUNT,YOU WIN TEXT AND CHANGE POSITION IN TOP LEFT CORNER
+
+12.PLAYER CONTROLLER SCRIPT UPDATE 
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,32 @@
+MONOALPHAEBATIC CIPHER :
+
+
+import string
+def generate_cipher_key(shift):
+    alphabet = string.ascii_lowercase
+    print(alphabet)
+    shifted_alphabet=alphabet[shift:]+alphabet[:shift]
+    
+    print(shifted_alphabet)
+    return str.maketrans(alphabet,shifted_alphabet)
+def encrypt(text,shift):
+    cipher_key=generate_cipher_key(shift)
+    return text.translate(cipher_key)
+
+def decrypt(encrypted_text,shift):
+    cipher_key=generate_cipher_key(-shift)
+    return encrypted_text.translate(cipher_key)
+
+#Example Driver Code
+
+message="HELLOBOY"
+
+shift=3
+
+
+encrypted=encrypt(message.lower(),shift)
+print("Encryped ",encrypted)
+
+decrypted = decrypt(encrypted,shift)
+print("Decrypted",decrypted)
+    

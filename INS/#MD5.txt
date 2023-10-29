@@ -1,0 +1,10 @@
+#MD5
+
+
+from hashlib import md5
+str1=input("Enter the Plain Text: ")
+if str1.isalpha()==True:
+    hashed=md5(str1.encode('utf-8')).hexdigest()
+else:
+    print("Enter only alphabets")
+print(hashed)

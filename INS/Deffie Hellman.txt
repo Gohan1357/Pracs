@@ -1,0 +1,20 @@
+#Deffie Hellman 
+
+
+import math 
+int1=int(input("Enter the modulo p:"))
+int2=int(input(f"Enter the root primitive of {int1}"))
+a=int(input("Choose the 1st secret no(Alice)"))
+b=int(input("Chppse the second secret key (BOb)"))
+
+A=int(math.pow(int2,a)%int1)
+B=int(math.pow(int2,b)%int1)
+
+
+A_ =int(math.pow(B,a)%int1)
+B_ =int(math.pow(A,b)%int1)
+
+if A_ ==B_:
+    print("Alice and Bob can communicate ")
+else:
+    print("Alice and Bob cannot communicate")

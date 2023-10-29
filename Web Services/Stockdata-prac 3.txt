@@ -1,0 +1,226 @@
+Web Service :
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Stockdata;
+
+import java.sql.ResultSet;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import javax.jws.WebService;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+
+/**
+ *
+ * @author gunuk
+ */
+@WebService(serviceName = "StockData_Service")
+public class StockData_Service {
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getNSE")
+    public double getNSE() {
+        //TODO write your implementation code here:
+        double nse=0.0;
+        
+        try{
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            
+            Connection con=DriverManager.getConnection("jdbc:derby://localhost:1527/StockExchange","aneesh123","admin@123");           
+            
+            Statement stmt=con.createStatement();
+            
+            ResultSet rs=stmt.executeQuery("SELECT  * FROM STOCKDATA");
+            rs.next();
+            
+            nse=rs.getInt("NSE");
+            con.close();
+            
+            
+            
+                    
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return nse;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getBSE")
+    public double getBSE() {
+        //TODO write your implementation code here:
+        double bse=0.0;
+       try{
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            
+            Connection con=DriverManager.getConnection("jdbc:derby://localhost:1527/StockExchange","aneesh123","admin@123");           
+            
+            Statement stmt=con.createStatement();
+            
+            ResultSet rs=stmt.executeQuery("SELECT  * FROM STOCKDATA");
+            rs.next();
+            
+            bse=rs.getInt("BSE");
+            con.close();
+            
+            
+            
+                    
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+       return bse;
+       
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "GoldRate")
+    public int GoldRate() {
+        //TODO write your implementation code here:
+        int Goldrate=0;
+       try{
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            
+            Connection con=DriverManager.getConnection("jdbc:derby://localhost:1527/StockExchange","aneesh123","admin@123");           
+            
+            Statement stmt=con.createStatement();
+            
+            ResultSet rs=stmt.executeQuery("SELECT  * FROM STOCKDATA");
+            rs.next();
+            
+            Goldrate=rs.getInt("GOLDRATE");
+            con.close();
+            
+            
+            
+                    
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+       return Goldrate;
+    }
+}
+
+
+
+
+
+
+
+
+
+index.html:
+
+
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>The stockExchnage Data</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="StockData.jsp">
+        <input type="submit" name="gold_rate"> Get Gold Rate<br/><br>
+        
+        <input type="submit" name="NSE"> Get NSE Index<br/><br>
+        
+        <input type="submit" name="BSE"> Get BSE Index<br/><br>
+        </form>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+Stockdata.jsp:
+
+
+
+
+<%-- 
+    Document   : StockData
+    Created on : 24 Oct, 2023, 12:02:01 PM
+    Author     : gunuk
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Retrieve Stock Data</title>
+    </head>
+    <body>
+           <!--to Get the Gold Rate rate of stock exchange--!>
+    <%
+        
+    try {
+	stockdata.StockDataService_Service service = new stockdata.StockDataService_Service();
+	stockdata.StockDataService port = service.getStockDataServicePort();
+	// TODO process result here
+	int result = port.goldRate();
+	out.println("GOld Rate = "+result);
+    } catch (Exception ex) {
+	// TODO handle custom exceptions here
+    }
+    %>
+    
+        <!--to Get the BSE rate of stock exchange--!>
+    <%
+    try {
+	stockdata.StockDataService_Service service = new stockdata.StockDataService_Service();
+	stockdata.StockDataService port = service.getStockDataServicePort();
+	// TODO process result here
+	double result = port.getBSE();
+	out.println("BSE = "+result);
+    } catch (Exception ex) {
+	// TODO handle custom exceptions here
+    }
+    %>
+    
+ <!--to Get the NSE rate of stock exchange--!>
+    <%
+    try {
+	stockdata.StockDataService_Service service = new stockdata.StockDataService_Service();
+	stockdata.StockDataService port = service.getStockDataServicePort();
+	// TODO process result here
+	double result = port.getNSE();
+	out.println("NSE = "+result);
+    } catch (Exception ex) {
+	// TODO handle custom exceptions here
+    }
+    %>
+    
+
+
+        
+    </body>
+</html>
+
+
+
+
+

@@ -1,0 +1,31 @@
+#Practical 6
+from tkinter import *
+import math
+root=Tk()
+root.title("Mariya Shaikh_71")
+C=Canvas(root,bg="aqua",height=2000,width=2000)
+C.create_text(650,90,text="Arrow before Reflection",fill="black",font=('Helvetica 15 bold'))
+arrow=C.create_polygon(500,185,600,100,600,150,720,150,720,220,600,220,600,270,fill="red")
+#Reflection
+a=int(input("Enter Value : "))
+C.create_text(300,90,text="Arrow after Reflection",fill="black",font=('Helvetica 15 bold'))
+x0=-500+2*a
+x1=-600+2*a
+x2=-600+2*a
+x3=-720+2*a
+x4=-720+2*a
+x5=-600+2*a
+x6=-600+2*a
+C.create_polygon(-500+2*a,185,-600+2*a,100,-600+2*a,150,-720+2*a,150,-720+2*a,220,-600+2*a,220,-600+2*a,270,fill="blue")
+#Translation
+tx=500
+ty=500
+C.create_text(1080,700,text="Translated Arrow",fill="black",font=('Helvetica 15 bold'))
+translatedarrow=C.create_polygon(x0+tx,185+ty,x1+tx,100+ty,x2+tx,150+ty,x3+tx,150+ty,x4+tx,220+ty,x5+tx,220+ty,x6+tx,270+ty,fill="green")
+#Scaling
+sx=2
+sy=2
+C.create_text(1060,350,text="Scaled Arrow",fill="black",font=('Helvetica 15 bold'))
+scalingarrow=C.create_polygon(x0*sx,185*sy,x1*sx,100*sy,x2*sx,150*sy,x3*sx,150*sy,x4*sx,220*sy,x5*sx,220*sy,x6*sx,270*sy,fill="pink")
+C.pack()
+mainloop()

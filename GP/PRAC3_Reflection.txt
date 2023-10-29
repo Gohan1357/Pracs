@@ -1,0 +1,65 @@
+#REFLECTION
+from tkinter import*
+import math
+root=Tk()
+root.title("Mariya Shaikh_71")
+c=Canvas(root,bg="aqua",height="2000",width="2000")
+x0=int(input("Enter value for x0 : "))
+y0=int(input("Enter value for y0 : "))
+x1=int(input("Enter value for x1 : "))
+y1=int(input("Enter value for y1 : "))
+x2=int(input("Enter value for x2 : "))
+y2=int(input("Enter value for y2 : "))
+x3=int(input("Enter value for x3 : "))
+y3=int(input("Enter value for y3 : "))
+x4=int(input("Enter value for x4 : "))
+y4=int(input("Enter value for y4 : "))
+a=int(input("Enter value : "))
+poly=c.create_polygon(x0,y0,x1,y1,x2,y2,x3,y3,x4,y4,fill="red")
+#y=a
+#x'=x
+#y'=-y+2a
+
+poly=c.create_polygon(x0,-y0+2*a,x1,-y1+2*a,x2,-y2+2*a,x3,-y3+2*a,x4,-y4+2*a,fill="blue")
+c.pack()
+mainloop()
+
+
+
+					OR
+
+
+
+
+Taking axis from user
+#Reflection
+#taking axis from user
+from tkinter import *
+root = Tk()
+root.title("Mariya Shaikh_71")
+canvas = Canvas(root, bg="#FFE4E1", height = 500, width = 500)
+axis = input("At what axis should the reflection be performed (x/y):")
+x0 = int(input("Enter x0:"))
+y0 = int(input("Enter y0:"))
+x1 = int(input("Enter x1:"))
+y1 = int(input("Enter y1:"))
+x2 = int(input("Enter x2:"))
+y2 = int(input("Enter y2:"))
+x3 = int(input("Enter x3:"))
+y3 = int(input("Enter y3:"))
+x4 = int(input("Enter x4:"))
+y4 = int(input("Enter y4:"))
+a = int(input("Enter value of a:"))
+polygon = canvas.create_polygon(x0, y0, x1, y1, x2, y2, x3, y3, x4, y4, fill="red")
+if(axis == "x"):
+canvas.create_text(120, 20, text = "Polygon before Reflection", font = ('BOLD'))
+canvas.create_text(120, (-y0+2*a)+20, text = "Polygon after Reflection", font = ('BOLD'))
+#parallel to x - axis
+new_polygon = canvas.create_polygon(x0, -y0+2*a, x1, -y1+2*a, x2, -y2+2*a, x3, -y3+2*a, x4, -y4+2*a, fill = "lime")
+elif (axis == 'y'):
+canvas.create_text(360, 20, text = "Polygon before Reflection", font = ('BOLD'))
+canvas.create_text((-x0+2*a)-20, 200, text = "Polygon after Reflection", font = ('BOLD'))
+#parallel to y-axis
+new_polygon = canvas.create_polygon(-x0+2*a, y0, -x1+2*a, y1, -x2+2*a, y2, -x3+2*a, y3, -x4+2*a, y4, fill = "lime")
+canvas.pack()
+mainloop()

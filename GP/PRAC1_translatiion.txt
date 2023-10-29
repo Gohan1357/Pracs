@@ -1,0 +1,21 @@
+code:
+
+#Translation (change position)
+from tkinter import*
+root=Tk()
+root.title("Mariya Shaikh_71")
+c=Canvas(root,bg="aqua",height="700",width="700")
+x0=int(input("Enter x0 : "))
+y0=int(input("Enter y0 : "))
+x1=int(input("Enter x1 : "))
+y1=int(input("Enter y1 : "))
+x2=int(input("Enter x2 : "))
+y2=int(input("Enter y2 : "))
+x3=int(input("Enter x3 : "))
+y3=int(input("Enter y3 : "))
+rectangle=c.create_polygon(x0,y0,x1,y1,x2,y2,x3,y3,fill="red")
+tx=100
+ty=100
+rectangle=c.create_polygon(x0+tx,y0+ty,x1+tx,y1+ty,x2+tx,y2+ty,x3+tx,y3+ty,fill="blue")
+c.pack()
+mainloop()

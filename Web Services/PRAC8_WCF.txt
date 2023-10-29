@@ -1,0 +1,154 @@
+WCF APPLICATION(c#): VISUAL STUDIO 
+
+WEB SERVICE:
+
+DELETE SVC AND .CS FILE AND CREATE NEW FILES - ADD NEW ITEM - WCF SERVICE 
+
+RENAME INTERFACE USING REFRACTOR ,RUN SVC FILE AND COPY LINK ,PASTE BROWSER AND COPY WSDL LINK
+
+.CS FILE:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.Text;
+
+namespace Pract_8
+{
+    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "ITestService" in both code and config file together.
+    [ServiceContract]
+    public interface IArithematic
+    {
+        [OperationContract]
+        double Sum(double a, double b);
+
+        [OperationContract]
+        double Diff(double a, double b);
+        [OperationContract]
+        double Mul(double a, double b);
+        [OperationContract]
+        double Div(double a, double b);
+
+
+
+
+
+    }
+}
+
+
+
+
+
+
+.SVC.CS FILE:
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.Text;
+
+namespace Pract_8
+{
+    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "TestService" in code, svc and config file together.
+    // NOTE: In order to launch WCF Test Client for testing this service, please select TestService.svc or TestService.svc.cs at the Solution Explorer and start debugging.
+    public class TestService : IArithematic
+    {
+        public double Diff(double a, double b)
+        {
+
+            double result = a - b;
+            return result;
+            //throw new NotImplementedException();
+        }
+
+        public double Div(double a, double b)
+        {
+            double result = a / b;
+            return result;
+
+
+            // throw new NotImplementedException();
+        }
+
+        public double Mul(double a, double b)
+        {
+            double result = a * b;
+            return result;
+            //throw new NotImplementedException();
+        }
+
+        public double Sum(double a, double b)
+        {
+            double result = a + b;  
+            return result;
+            // throw new NotImplementedException();
+        }
+    }
+}
+
+
+
+
+
+
+WCF CLIENT: (ASP.NET WEB APPLICATION (C#) ):
+
+PRAC8.ASPX:
+CREATE 3 TEXTBOX AND 4 BUTTONS
+
+ADD SERVICE REFERNCE (PASTE WSDL URL ):
+
+PRAC8.ASPX.CS:
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.Text;
+
+namespace Pract_8
+{
+    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "ITestService" in both code and config file together.
+    [ServiceContract]
+    public interface IArithematic
+    {
+        [OperationContract]
+        double Sum(double a, double b);
+
+        [OperationContract]
+        double Diff(double a, double b);
+        [OperationContract]
+        double Mul(double a, double b);
+        [OperationContract]
+        double Div(double a, double b);
+
+
+
+
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

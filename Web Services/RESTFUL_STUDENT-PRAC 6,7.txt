@@ -1,0 +1,83 @@
+RESTFUL WEBSERVICE : #sAME FOR PRAC 6 TOO - EMPLOYEE
+CREATE WEB APPLICATION AND RESTFUL WEBSERVICE FROM DATA
+
+RESTFUL CLIENT_STUDENT: (NOTE :REMOVE APPLICATION/XML EVERY  IN STUDENTFACADE.JAVA AND ONLY USE JSON )
+
+CREATE WEB APPLICATION THEN  RESTFUL WEB SERVICE CLIENT AND CREATE HTML AND JSP:
+
+
+INDEX.HTML:
+
+
+<html>
+<head>
+<title>TODO supply a title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<form action="newjsp.jsp">
+<input type="submit" name="submit" value="GET STUDENT" />
+</form>
+</body>
+</html>
+
+
+STUDENT.JSP: PROPERLY COPY RESTFUL URL RESOURCE  LINK AFTER TESTING THE SERVICE
+
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>JSP Page</title>
+<style>
+    table{
+    font-family: arial,sans-serif; border-collapse: collapse;
+    }
+    th,td{
+    text-align:center;
+    border:1px solid #000000; padding:8px;
+    }
+</style>
+<script>
+    var request = new XMLHttpRequest();
+    request.open('GET','http://localhost:8080/stud/webresources/mypack.student',true)
+    ;
+
+    request.onload=function()
+    {
+
+    var data=JSON.parse(this.response); 
+    for(var i=0;i<data.length;i++)
+    {
+
+    var table = document.getElementById("StudTable"); var row = table.insertRow();
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1); 
+    var cell3 = row.insertCell(2);
+    cell1.innerHTML=data[i].studid; 
+    cell2.innerHTML=data[i].name;
+    cell3.innerHTML=data[i].marks;
+    }
+    };
+
+    request.send();
+</script>
+</head>
+    <body>
+        <table id="StudTable">
+        <tr>
+        <th>Roll no</th>
+        <th>Name</th>
+        <th>Marks</th>
+        </tr>
+        </table>
+    </body>
+</html>
+
+
+
+
+

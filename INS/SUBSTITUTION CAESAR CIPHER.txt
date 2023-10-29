@@ -1,0 +1,29 @@
+SUBSTITUTION CAESAR CIPHER
+
+
+import string
+pt=input("Enter plain text")
+
+shift_value=int(input("Enter the  value to Shift: "))
+
+alp=list(string.ascii_lowercase)
+
+c1=""
+c=0
+c_list=[]
+for i in range(0,len(pt)):
+    if pt[i].isalpha():
+        c=(alp.index(pt[i]))+shift_value
+        if(c>26):
+            c=c%26
+        c1=c1+alp[c]
+print("The encrypted Text is: ",c1)
+c2=""
+
+for  i in range(0,len(c1)):
+    if c1[i].isalpha():
+        c=(alp.index(c1[i]))-shift_value
+        if(c>26):
+            c=c%26
+        c2=c2+alp[c]
+print("The dencrypted text is: ",c2)

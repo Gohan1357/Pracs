@@ -1,0 +1,19 @@
+#Scaling (change Size)
+from tkinter import *
+root=Tk()
+root.title("Mariya Shaikh_71")
+C=Canvas(root,bg="aqua",height=400,width=400)
+C.create_text(110,30,text="Triangle before Scaling")
+x0=int(input("Enter value : "))
+y0=int(input("Enter value : "))
+x1=int(input("Enter value : "))
+y1=int(input("Enter value : "))
+x2=int(input("Enter value : "))
+y2=int(input("Enter value : "))
+poly=C.create_polygon(x0,y0,x1,y1,x2,y2,fill="red")
+sx=2
+sy=2
+C.create_text(110,200,text="Triangle after Scaling")
+poly=C.create_polygon(100*sx,100*sy,100*sx,150*sy,150*sx,150*sy,fill="blue")
+C.pack()
+mainloop()

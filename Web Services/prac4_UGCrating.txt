@@ -1,0 +1,137 @@
+
+
+
+
+WEBSERVICE:
+
+
+package Ratings;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.jws.WebService;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+
+@WebService(serviceName = "UGC_Rating")
+public class UGC_Rating {
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getRating")
+    public String getRating(@WebParam(name = "Collegname") String Collegname) {
+        //TODO write your implementation code here:
+        String rating="";
+        
+        try{
+            
+            //Loading the driver Class
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            //Create Database Connection
+            Connection con=DriverManager.getConnection("jdbc:derby://localhost:1527/CollegeRatings","aneesh123","admin@123");
+            /*
+            Statement stmt=con.createStatement();*/
+            
+            PreparedStatement pstmt =con.prepareStatement("SELECT * FROM NAACRATING WHERE COLLEGENAME=?");
+            
+            pstmt.setString(1,Collegname);
+            
+            ResultSet rs= pstmt.executeQuery();
+            
+            rs.next();
+            rating=rs.getString("RATING");
+            
+            con.close();
+            
+            
+                    
+            
+        }
+        
+        catch(Exception e){
+            
+            e.printStackTrace();
+        }
+      return rating;
+    }
+}
+
+
+
+
+INDEX.HTML:
+
+
+
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>College Ratings</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="rating.jsp">
+            College<input type="text" name="collegename" value=""/><br>
+            <input type="submit" value="Check Rating"/>
+        </form>
+    </body>
+</html>
+
+
+
+
+RATING.JSP:
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Ratings Page </title>
+    </head>
+    <body>
+        <h1>NAAC Rating of the College</h1>
+        
+    <%
+        String text1=request.getParameter("collegename");
+    try {
+	ratings.UGCRating_Service service = new ratings.UGCRating_Service();
+	ratings.UGCRating port = service.getUGCRatingPort();
+	 // TODO initialize WS operation arguments here
+	java.lang.String collegname = "";
+	// TODO process result here
+	java.lang.String result = port.getRating(text1);
+	out.println("Result = "+result);
+    } catch (Exception ex) {
+	// TODO handle custom exceptions here
+    }
+    %>
+   
+
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

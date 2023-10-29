@@ -1,0 +1,23 @@
+#Practical 5
+#Shearing
+from tkinter import *
+import math
+root=Tk()
+root.title("Mariya Shaikh_71")
+C=Canvas(root,bg="aqua",height=400,width=400)
+C.create_text(110,30,text="Shearing")
+x0=int(input("Enter x0 : "))
+y0=int(input("Enter y0 : "))
+x1=int(input("Enter x1 : "))
+y1=int(input("Enter y1 : "))
+x2=int(input("Enter x2 : "))
+y2=int(input("Enter y2 : "))
+x3=int(input("Enter x3 : "))
+y3=int(input("Enter y3 : "))
+b=int(input("Enter the angle of shearing : "))
+poly=C.create_polygon(x0,y0,x1,y1,x2,y2,x3,y3,fill="red")
+xsh1=x0+y0*math.tan(math.radians(b))
+xsh2=x3+y3*math.tan(math.radians(b))
+poly=C.create_polygon(xsh1,y0,x1,y1,x2,y2,xsh2,y3,fill="blue")
+C.pack()
+mainloop()

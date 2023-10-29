@@ -1,0 +1,168 @@
+WEB SERVICE:
+
+
+package Prac5;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.jws.WebService;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+
+@WebService(serviceName = "NewsandSunsign")
+public class NewsandSunsign {
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getBreakingNews")
+    public String getBreakingNews(@WebParam(name = "date") String date) {
+        //TODO write your implementation code here:
+      String bn="";
+      try{
+          Class.forName("org.apache.derby.jdbc.ClientDriver");
+          
+          Connection con=DriverManager.getConnection("jdbc:derby://localhost:1527/NEWSANDSUNSIGN","aneesh123","admin@123");
+          
+          PreparedStatement pstmt =con.prepareStatement("SELECT *  FROM NEWS WHERE DATE=?");
+          
+          pstmt.setString(1,date);
+          
+          ResultSet rs=pstmt.executeQuery();
+          rs.next();
+          bn=rs.getString("BNEWS");
+          
+          
+      }
+      
+      catch(Exception e){
+          e.printStackTrace();
+      }
+      return bn;
+      
+      
+      
+    }
+    
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getPrediction")
+    public String getPrediction(@WebParam(name = "sunsign") String sunsign) {
+        
+        //TODO write your implementation code here:
+        String prediction="";
+        try{
+        
+        Class.forName("org.apache.derby.jdbc.ClientDriver");
+          
+          Connection con=DriverManager.getConnection("jdbc:derby://localhost:1527/NEWSANDSUNSIGN","aneesh123","admin@123");
+          
+          PreparedStatement pstmt =con.prepareStatement("SELECT *  FROM PREDICTIONS WHERE SUNSIGN=?");
+          
+          pstmt.setString(1,sunsign);
+          
+          ResultSet rs=pstmt.executeQuery();
+          rs.next();
+          prediction=rs.getString("PREDICTIONS");
+        
+    }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return prediction;
+}
+}
+
+
+
+
+
+INDEX.HTML:
+
+
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Breaking News and Sunsign</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="newjsp.jsp">
+Enter the date<input type="text" name="date" value="" /><input type="submit" value="Submit" /><br><br>
+Enter your Sunsign<input type="text" name="sunsign" value="" />
+<input type="submit" value="submit" />
+</form>
+       
+    </body>
+</html>
+
+
+
+
+
+
+NEWANDSUNSIG.JSP:
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+           <%-- start web service invocation --%><hr/>
+    <%
+    try {
+	prac5.NewsandSunsign_Service service = new prac5.NewsandSunsign_Service();
+	prac5.NewsandSunsign port = service.getNewsandSunsignPort();
+	 // TODO initialize WS operation arguments here
+	java.lang.String date =request.getParameter("date");
+	// TODO process result here
+	java.lang.String result = port.getBreakingNews(date);
+	out.println("Result = "+result);
+    } catch (Exception ex) {
+	// TODO handle custom exceptions here
+    }
+    %>
+    <%-- end web service invocation --%><hr/>
+    <%-- start web service invocation --%><hr/>
+    <%
+    try {
+	prac5.NewsandSunsign_Service service = new prac5.NewsandSunsign_Service();
+	prac5.NewsandSunsign port = service.getNewsandSunsignPort();
+	 // TODO initialize WS operation arguments here
+	java.lang.String sunsign =request.getParameter("sunsign");
+	// TODO process result here
+	java.lang.String result = port.getPrediction(sunsign);
+	out.println("Result = "+result);
+    } catch (Exception ex) {
+	// TODO handle custom exceptions here
+    }
+    %>
+    <%-- end web service invocation --%><hr/>
+
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,10 @@
+SHA256
+
+from hashlib import sha256
+str1=input("Enter the Plain Text: ")
+
+if str1.isalpha()==True:
+    hashed=sha256(str1.encode('utf-8')).hexdigest()
+else:
+    print("Enter only alphabets")
+print(hashed)
