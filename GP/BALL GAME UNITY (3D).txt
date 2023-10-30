@@ -98,3 +98,39 @@ void Update()
 transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime);
 }
 }
+
+
+
+
+
+
+
+INSTRUCTIONS:
+
+
+STEP1:Create plane and Sphere in Hierarchy
+
+STEP2: Make material for sphere and plane and add in hierarchy
+
+STEP3: Add Physics component to player - Add RigidBody .Add Player Controller Script
+
+Step4: Camera Position(0,10,10) Rotation(X=45  degree)
+
+STEP 5: Create empty object in hierarchy - Walls
+
+STEP 6: Create 3d Object hierarchy - 3d cube Rename Westwall drag inside wall
+
+Step 7: Change Position X=0.75 scale (0.5,2,10.5) Add colour to wall 
+
+STEP 8: Duplicate Walls and place in all four directions 
+
+STEP 9: Empty game object - rename Parent Pickup.
+	Create 3d cube object -pickup and place under ParentPickup .Position(0,0.5,0) ,Rotation(45,45,45) ,Scale(0.5,0.5,0.5).Change Colour of pickup.
+
+STEP 10:Add Script to pickup - Rotator.cs 
+
+STEP 11: Add tags on Pickup  named pickup .
+
+STEP 12: Create text object for Score and WinText.
+
+STEP 13: Make changes to player  Controller script for score and win.Add wintext and score to player inspector.
